@@ -101,4 +101,9 @@ var j = schedule.scheduleJob(rule, () => {
   isCTFBlitzIn();
 });
 
-client.login("NzMzODgwNTI4NzAwMzA5NTQ1.XxJllw.2nrZCsl-qhzvX90bmUUTc2vOK-E");
+const prompt = require("prompt");
+prompt.start();
+
+prompt.get(["token"], (err, result) => {
+  client.login(result.token);
+});
