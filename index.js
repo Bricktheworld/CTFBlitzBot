@@ -11,6 +11,8 @@ client.on("ready", () => {
 client.on("message", (message) => {
   if (message.content === "!arcade") {
     getArcadeModes(message);
+  } else if (message.content === "!test-ctfblitz") {
+    isCTFBlitzIn(true);
   }
 });
 
@@ -41,7 +43,7 @@ function getArcadeModes(message) {
     });
 }
 
-function isCTFBlitzIn() {
+function isCTFBlitzIn(notifyIfnotIn = false) {
   https
     .get("https://overwatcharcade.today/api/overwatch/today", (resp) => {
       let data = "";
@@ -80,6 +82,12 @@ function isCTFBlitzIn() {
                   .get("688181231707488266")
                   .send(
                     "<@&689571428177281049> CTF Blitz is in! Time to troll"
+                  );
+              } else if (notifyIfnotIn) {
+                client.channels.cache
+                  .get("688181231707488266")
+                  .send(
+                    "<@&689571428177281049> Someone is sneaky and found out how to make the bot ping everyone"
                   );
               }
             });
